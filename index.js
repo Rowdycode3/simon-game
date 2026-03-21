@@ -4,8 +4,11 @@ let colors = ["green", "red", "yellow", "blue"];
 let started = false;
 let level = 1;
 
-// ✅ Start button (mobile + desktop)
-$("#startBtn").on("click", function () {
+// ✅ Detect device (mobile vs desktop)
+let eventType = "ontouchstart" in document.documentElement ? "touchstart" : "click";
+
+// ✅ Start button
+$("#startBtn").on(eventType, function () {
   if (!started) {
     started = true;
     level = 1;
@@ -23,35 +26,30 @@ function nextSequence() {
 
   $("#level-title").text("Level " + level);
 
-  let btn = $("#" + chosenColor);
-  btn.addClass("pressed");
-  setTimeout(() => btn.removeClass("pressed"), 150);
-
-  let audio = new Audio("sounds/" + chosenColor + ".mp3");
-  audio.play();
+  animatePress(chosenColor);
+  playSound(chosenColor);
 }
 
-// ✅ Button clicks (mobile + desktop)
-$("#green, #red, #yellow, #blue").on("click touchstart", function () {
+// ✅ Button clicks
+$("#green, #red, #yellow, #blue").on(eventType, function () {
+
+  if (!started) return; // prevent clicking before game starts
 
   let userChosenColor = $(this).attr("id");
   userPattern.push(userChosenColor);
 
-  // sound
-  let audio = new Audio("sounds/" + userChosenColor + ".mp3");
-  audio.play();
-
-  // animation
-  $(this).addClass("pressed");
-  setTimeout(() => $(this).removeClass("pressed"), 150);
+  animatePress(userChosenColor);
+  playSound(userChosenColor);
 
   checkAnswer(userPattern.length - 1);
 });
 
+// ✅ Check answer
 function checkAnswer(currentIndex) {
+
   if (userPattern[currentIndex] === gamePattern[currentIndex]) {
 
-    // if user completed the sequence
+    // ✅ If sequence complete → next level
     if (userPattern.length === gamePattern.length) {
       setTimeout(() => {
         level++;
@@ -61,8 +59,7 @@ function checkAnswer(currentIndex) {
 
   } else {
     // ❌ Wrong answer
-    let audio = new Audio("sounds/wrong.mp3");
-    audio.play();
+    playSound("wrong");
 
     $("body").addClass("game-over");
     setTimeout(() => $("body").removeClass("game-over"), 200);
@@ -71,4 +68,16 @@ function checkAnswer(currentIndex) {
 
     started = false;
   }
+}
+
+// ✅ Sound function
+function playSound(name) {
+  let audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
+}
+
+// ✅ Animation function
+function animatePress(color) {
+  $("#" + color).addClass("pressed");
+  setTimeout(() => $("#" + color).removeClass("pressed"), 150);
 }
