@@ -90,7 +90,7 @@ function checkAnswer(currentIndex) {
   } else {
     // 😂 Random game over message
     let msg = gameOverMessages[Math.floor(Math.random() * gameOverMessages.length)];
-    $("#level-title").text(msg + "Game Over!");
+    $("#level-title").text(msg + " Game Over!");
 
     playSound("wrong");
 
