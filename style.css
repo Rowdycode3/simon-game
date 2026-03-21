@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fff6c0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full screen */
+  overflow: hidden; /* 🚀 remove scroll */
+  font-family: "Press Start 2P", cursive;
+}
+h1 {
+  font-size: clamp(18px, 4vw, 30px);
+  font-weight: 600;
+  color: #2f6b3f;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.boxs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20%;
+  border: 8px solid black;
+}
+
+.green {
+  background-color: green;
+}
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
+.blue {
+  background-color: blue;
+}
+
+.pressed {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95);
+}
+
+@media (min-width: 600px) {
+  .container {
+    gap: 60px;
+  }
+
+  .boxs {
+    gap: 30px;
+  }
+
+  .btn {
+    border: 10px solid black;
+  }
+}
+
+@media (min-width: 900px) {
+  .boxs {
+    gap: 40px;
+  }
+
+  .btn {
+    max-width: 200px;
+  }
+}
