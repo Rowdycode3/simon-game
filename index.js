@@ -5,7 +5,7 @@ let started = false;
 let level = 1;
 
 // ✅ Start button (mobile + desktop)
-$("#startBtn").on("click touchstart", function () {
+$("#startBtn").on("click", function () {
   if (!started) {
     started = true;
     level = 1;
