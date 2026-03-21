@@ -1,32 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simon Game By Rowdy</title>
+<head>
+  <meta charset="UTF-8">
+  <title>Simon Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link
-      rel="shortcut icon"
-      href="./images/favicon-R-32x32.png"
-      type="image/x-icon"
-    />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+  <h1 id="level-title">Press Start to Play</h1>
 
-  <body>
-    <section class="container">
-      <h1>Press A Key To Start</h1>
+  <button id="startBtn">Start Game</button>
 
-      <section class="boxs">
-        <div id="green" class="btn green"></div>
-        <div id="red" class="btn red"></div>
-        <div id="yellow" class="btn yellow"></div>
-        <div id="blue" class="btn blue"></div>
-      </section>
-    </section>
+  <div class="container">
+    <div class="row">
+      <div class="btn green" id="green"></div>
+      <div class="btn red" id="red"></div>
+    </div>
+    <div class="row">
+      <div class="btn yellow" id="yellow"></div>
+      <div class="btn blue" id="blue"></div>
+    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="index.js"></script>
-  </body>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
