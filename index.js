@@ -31,49 +31,44 @@ function nextSequence() {
   audio.play();
 }
 
-// ✅ Button clicks (already mobile friendly)
+// ✅ Button clicks (mobile + desktop)
 $("#green, #red, #yellow, #blue").on("click touchstart", function () {
 
-  if (!started) return;
+  let userChosenColor = $(this).attr("id");
+  userPattern.push(userChosenColor);
 
-  let btn = $(this);
-  let clickedColor = btn.attr("id");
-
-  btn.addClass("pressed");
-  setTimeout(() => btn.removeClass("pressed"), 150);
-
-  let audio = new Audio("sounds/" + clickedColor + ".mp3");
+  // sound
+  let audio = new Audio("sounds/" + userChosenColor + ".mp3");
   audio.play();
 
-  userPattern.push(clickedColor);
+  // animation
+  $(this).addClass("pressed");
+  setTimeout(() => $(this).removeClass("pressed"), 150);
 
   checkAnswer(userPattern.length - 1);
 });
 
 function checkAnswer(currentIndex) {
+  if (userPattern[currentIndex] === gamePattern[currentIndex]) {
 
-  if (gamePattern[currentIndex] === userPattern[currentIndex]) {
-
+    // if user completed the sequence
     if (userPattern.length === gamePattern.length) {
       setTimeout(() => {
         level++;
         nextSequence();
-      }, 500);
+      }, 800);
     }
 
   } else {
-
-    $("#level-title").text("Game Over 😅 Tap Start to Retry");
-
+    // ❌ Wrong answer
     let audio = new Audio("sounds/wrong.mp3");
     audio.play();
 
     $("body").addClass("game-over");
     setTimeout(() => $("body").removeClass("game-over"), 200);
 
+    $("#level-title").text("Game Over! Press Start Again");
+
     started = false;
-    gamePattern = [];
-    userPattern = [];
-    level = 1;
   }
 }
